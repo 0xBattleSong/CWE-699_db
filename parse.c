@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include "parse.h" // libxml headers included
 
 uint8_t flag = 255;
@@ -56,15 +57,18 @@ xmlNodePtr traverse(xmlNodePtr *curp) {
 
 	while (cur->next != NULL) {
 
-		if ( xmlStrcmp(cur->name, (xmlChar *)"text") != 0) {
+		flag = xmlStrcmp(cur->name, (xmlChar *)"text");
+		if (flag != 0) {
 			printf("%s\n", cur->name);
 		}
 
-		if (cur->next != NULL) {
-			cur = cur->next;
-		} else if (cur->children != NULL) {
+		if (cur->children != NULL && flag != 0) {
 			cur = cur->children;
 		}
+		else if (cur->next != NULL) {
+			cur = cur->next;
+		}
+
 	}
 
 	return cur;
