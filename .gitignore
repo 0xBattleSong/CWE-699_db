@@ -3,3 +3,4 @@ a.out
 parse
 .cache/*
 compile_commands.json
+tags
