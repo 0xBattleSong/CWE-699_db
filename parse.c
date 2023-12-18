@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <libxml/parser.h>
-#include <libxml/xmlmemory.h>
-#include "parse.h"
-
-void traverse(xmlNodePtr *);
-int parseDoc(char *);
-xmlNodePtr recurseNode(&cur);
+#include "parse.h" // libxml headers included
 
 uint8_t flag = 255;
 
@@ -34,17 +28,21 @@ int parseDoc(char *docPath) {
 	return 0;
 }
 
-void traverse(xmlNodePtr *curp) {
+xmlNodePtr traverse(xmlNodePtr *curp) {
 	xmlNodePtr cur = *curp;
-	while (cur != NULL) {
+
+	while (cur->next != NULL) {
+
 		printf("%s\n", cur->name);
+
 		cur = cur->next;
 	}
-	recurseNode(&cur);
-}
 
-xmlNodePtr recurseNode(xmlNodePtr *curp) {
-	xmlNodePtr cur = *curp;
+	if (cur->children != NULL) {
+		printf("%s\n", (char *)cur->name);
+		return traverse( &(cur->children));
+	}
+	printf("%s\n", (char *)cur->name);
 	return cur;
 }
 

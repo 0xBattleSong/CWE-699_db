@@ -1,3 +1,5 @@
-void traverse(xmlNodePtr *);
+#include <libxml/parser.h>
+#include <libxml/xmlmemory.h>
+
+xmlNodePtr traverse(xmlNodePtr *);
 int parseDoc(char *);
-xmlNodePtr recurseNode(&cur);
