@@ -5,6 +5,26 @@
 
 uint8_t flag = 255;
 
+struct nodeDocSet {
+	xmlDocPtr doc;
+	xmlNodePtr cur;
+};
+struct nodeDocSet set;
+
+struct nodeDocSet *loadDoc(char *docPath) {
+	set.doc = xmlParseFile(docPath);
+	if (set.doc == NULL) {
+		fprintf(stderr, "Document not parsed successfully.\n");
+		return NULL;
+	}
+	set.cur = xmlDocGetRootElement(set.doc);
+	if (set.cur == NULL) {
+		fprintf(stderr, "empty document\n");
+		xmlFreeDoc(set.doc);
+	}
+	return &set;
+}
+
 int parseDoc(char *docPath) {
 	xmlDocPtr doc;
 	xmlNodePtr cur;
