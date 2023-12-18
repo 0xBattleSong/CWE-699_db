@@ -1,4 +1,4 @@
-SRC    := main.c
+SRC    := parse.c
 CC     := gcc
 CFLAGS := -Wall -g
 LIBS   := -lxml2
