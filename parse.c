@@ -51,16 +51,22 @@ int parseDoc(char *docPath) {
 xmlNodePtr traverse(xmlNodePtr *curp) {
 	xmlNodePtr cur = *curp;
 
+	printf("%s\n", cur->name);
+	cur = cur->children->next;
+
 	while (cur->next != NULL) {
-		printf("%s\n", cur->name);
-		cur = cur->next;
+
+		if ( xmlStrcmp(cur->name, (xmlChar *)"text") != 0) {
+			printf("%s\n", cur->name);
+		}
+
+		if (cur->next != NULL) {
+			cur = cur->next;
+		} else if (cur->children != NULL) {
+			cur = cur->children;
+		}
 	}
 
-	if (cur->children != NULL) {
-		printf("%s\n", (char *)cur->name);
-		return traverse( &(cur->children));
-	}
-	printf("%s\n", (char *)cur->name);
 	return cur;
 }
 
