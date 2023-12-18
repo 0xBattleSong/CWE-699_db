@@ -32,9 +32,7 @@ xmlNodePtr traverse(xmlNodePtr *curp) {
 	xmlNodePtr cur = *curp;
 
 	while (cur->next != NULL) {
-
 		printf("%s\n", cur->name);
-
 		cur = cur->next;
 	}
 
