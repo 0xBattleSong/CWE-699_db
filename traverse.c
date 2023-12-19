@@ -31,25 +31,23 @@ int parseDoc(char *filePath) {
 }
 
 xmlNodePtr *traverse(xmlNodePtr *curp) {
+	cur = *curp;
 
-	printf("%s\n", cur->name);
-	
-	while (cur != NULL) {
+	if (cur->type == XML_TEXT_NODE) {
+		cur = cur->next;
+	}
+	if (cur->type != XML_TEXT_NODE) {
+		printf("%s\n", cur->name);
+	}
 
-		if (cur->type == XML_TEXT_NODE) {
-
-			if (cur->children->next != NULL) {
-				cur = *traverse( &(cur->children->next));
-			} else if (cur->next != NULL) {
-				cur = cur->next;
-			} else {
-				cur = cur->parent->next;
-			}
-		}
-
+	if (cur->children->next != NULL) {
+		cur = *traverse( &(cur->children));
+	} else if (cur->parent->next != NULL) {
+		cur = *traverse( &(cur->parent->next));
 	}
 
 	return &cur;
+
 }
 
 int main(int argc, char *argv[]) 
