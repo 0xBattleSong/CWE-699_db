@@ -1,9 +1,9 @@
-SRC    := parse.c
+SRC    := traverse.c
 CC     := gcc
 CFLAGS := -Wall -g
 LIBS   := -lxml2
 DBG    := gdb
-BIN    := parse
+BIN    := traverse
 ARGS   :=
 
 build:
