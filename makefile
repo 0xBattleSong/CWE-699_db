@@ -1,10 +1,10 @@
-SRC    := traverse.c
+SRC    := overview.c
 CC     := gcc
 CFLAGS := -Wall -g
 LIBS   := -lxml2
 DBG    := gdb
 DEBUGOPTS := --args
-BIN    := traverse
+BIN    := overview
 ARGS   := comVulns.xml
 
 build:
